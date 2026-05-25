@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Direcionamento Semanal · Loppiano Pizza</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css">
+<style>
+  :root {
+    --bg: #F7F4EE;
+    --surface: #FFFFFF;
+    --surface2: #F0EBE0;
+    --border: rgba(0,0,0,0.08);
+    --border2: rgba(0,0,0,0.13);
+    --text: #1A1710;
+    --text2: #6B6355;
+    --text3: #A09880;
+    --verde: #1A3C2A;
+    --verde-m: #2D6A4F;
+    --verde-l: #E1F0E8;
+    --verde-d: #0D2218;
+    --vermelho: #B5271E;
+    --vermelho-l: #FCEBEA;
+    --vermelho-d: #7A1A14;
+    --ouro: #BA7517;
+    --ouro-l: #FAEEDA;
+    --ouro-d: #633806;
+    --azul: #185FA5;
+    --azul-l: #E6F1FB;
+    --azul-d: #0C447C;
+    --roxo: #534AB7;
+    --roxo-l: #EEEDFE;
+    --roxo-d: #26215C;
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--verde);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 56px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .logo {
+    font-family: 'DM Serif Display', serif;
+    font-size: 17px;
+    color: #fff;
+    letter-spacing: -0.02em;
+  }
+  .logo span { color: #9FE1CB; }
+
+  .header-meta {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  /* ── TABS ── */
+  .tabs-bar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex;
+    gap: 0;
+    position: sticky;
+    top: 56px;
+    z-index: 99;
+  }
+
+  .tab-btn {
+    padding: 0 1.5rem;
+    height: 48px;
+    border: none;
+    background: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text3);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--text); border-bottom-color: var(--verde); }
+  .tab-btn i { font-size: 16px; }
+
+  /* ── CONTENT ── */
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+
+  /* ── PAGE WRAPPER ── */
+  .page { padding: 2rem; max-width: 1100px; margin: 0 auto; }
+
+  /* ── SECTION LABEL ── */
+  .slabel {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 12px;
+  }
+
+  .gap { margin-bottom: 2rem; }
+
+  /* ── KPI GRID ── */
+  .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  .kpi {
+    background: var(--surface);
+    border-radius: var(--radius-sm);
+    padding: 16px 18px;
+    border: 1px solid var(--border);
+  }
+  .kpi-lbl { font-size: 11px; color: var(--text3); margin-bottom: 6px; }
+  .kpi-val {
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--text);
+    line-height: 1;
+    font-family: 'DM Serif Display', serif;
+  }
+  .kpi-sub { font-size: 11px; color: var(--text3); margin-top: 4px; }
+
+  .c-verde { color: var(--verde-m); }
+  .c-vermelho { color: var(--vermelho); }
+  .c-ouro { color: var(--ouro); }
+  .c-azul { color: var(--azul); }
+  .c-roxo { color: var(--roxo); }
+
+  /* ── TWO / THREE COL ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 20px;
+    border: 1px solid var(--border);
+  }
+  .card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .card-sub {
+    font-size: 11px;
+    color: var(--text3);
+    margin-bottom: 14px;
+  }
+
+  /* ── INSIGHT PILLS ── */
+  .insight {
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    margin-bottom: 10px;
+  }
+  .insight-tag {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .insight-text { font-size: 12px; line-height: 1.5; }
+
+  .ig { background: var(--verde-l); }
+  .ig .insight-tag { color: var(--verde-m); }
+  .ig .insight-text { color: var(--verde-d); }
+
+  .ir { background: var(--vermelho-l); }
+  .ir .insight-tag { color: var(--vermelho); }
+  .ir .insight-text { color: var(--vermelho-d); }
+
+  .io { background: var(--ouro-l); }
+  .io .insight-tag { color: var(--ouro); }
+  .io .insight-text { color: var(--ouro-d); }
+
+  .ia { background: var(--azul-l); }
+  .ia .insight-tag { color: var(--azul); }
+  .ia .insight-text { color: var(--azul-d); }
+
+  .ib { background: var(--roxo-l); }
+  .ib .insight-tag { color: var(--roxo); }
+  .ib .insight-text { color: var(--roxo-d); }
+
+  /* ── RULE ITEMS ── */
+  .rule-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text2);
+  }
+  .rule-item:last-child { border-bottom: none; }
+  .rule-item i { font-size: 15px; margin-top: 2px; flex-shrink: 0; }
+  .rule-item strong { color: var(--text); }
+
+  /* ── FLOW SECTION ── */
+  .flow-section {
+    background: var(--surface);
+    border-radius: var(--radius);
+    padding: 20px;
+    border: 1px solid var(--border);
+    margin-bottom: 14px;
+  }
+  .flow-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 2px;
+  }
+  .flow-sub {
+    font-size: 11px;
+    color: var(--text3);
+    margin-bottom: 14px;
+  }
+
+  /* ── BADGE ── */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+  .badge-verde { background: var(--verde-l); color: var(--verde-m); }
+  .badge-vermelho { background: var(--vermelho-l); color: var(--vermelho); }
+  .badge-ouro { background: var(--ouro-l); color: var(--ouro-d); }
+  .badge-azul { background: var(--azul-l); color: var(--azul-d); }
+  .badge-roxo { background: var(--roxo-l); color: var(--roxo-d); }
+
+  /* ── NEXT STEPS TABLE ── */
+  .steps-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .steps-table th {
+    padding: 10px 14px;
+    text-align: left;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text2);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .steps-table td {
+    padding: 11px 14px;
+    border: 1px solid var(--border);
+    color: var(--text2);
+    vertical-align: top;
+  }
+  .steps-table tr:nth-child(even) td { background: var(--surface2); }
+  .steps-table td strong { color: var(--text); }
+
+  /* ── TOPIC BLOCK ── */
+  .topic-block {
+    background: var(--surface);
+    border-radius: var(--radius);
+    border: 1px solid var(--border);
+    padding: 20px;
+    margin-bottom: 14px;
+  }
+  .topic-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .topic-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .topic-icon.verde { background: var(--verde-l); color: var(--verde-m); }
+  .topic-icon.vermelho { background: var(--vermelho-l); color: var(--vermelho); }
+  .topic-icon.ouro { background: var(--ouro-l); color: var(--ouro); }
+  .topic-icon.azul { background: var(--azul-l); color: var(--azul); }
+  .topic-icon.roxo { background: var(--roxo-l); color: var(--roxo); }
+
+  .topic-title { font-size: 14px; font-weight: 600; color: var(--text); }
+  .topic-sub { font-size: 11px; color: var(--text3); }
+
+  /* ── DIVIDER ── */
+  .divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight-box {
+    border-left: 3px solid var(--verde-m);
+    background: var(--verde-l);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 12px 16px;
+    margin-top: 12px;
+    font-size: 12px;
+    color: var(--verde-d);
+    line-height: 1.5;
+  }
+
+  /* ── WHATSAPP FLOAT ── */
+  .wpp-float {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #25D366;
+    color: #fff;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 12px 20px 12px 16px;
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .wpp-float:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 28px rgba(37,211,102,0.45);
+  }
+  .wpp-float i { font-size: 20px; }
+  .wpp-float .wpp-label { line-height: 1.2; }
+  .wpp-float .wpp-name { display: block; font-size: 11px; font-weight: 400; opacity: 0.85; }
+
+  /* ── MEETING DATES ── */
+  .meeting-dates {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+  }
+  .meeting-date-card {
+    background: var(--surface);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--border);
+    padding: 14px 18px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .meeting-date-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .meeting-date-lbl { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text3); margin-bottom: 2px; }
+  .meeting-date-val { font-size: 15px; font-weight: 600; color: var(--text); font-family: 'DM Serif Display', serif; }
+
+  /* ── SUMMARY HEADER CARD ── */
+  .summary-header {
+    background: var(--verde);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .summary-header h1 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 22px;
+    color: #fff;
+    font-weight: 400;
+    margin-bottom: 4px;
+  }
+  .summary-header p {
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+  }
+  .summary-header .pill {
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #9FE1CB;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">Loppiano <span>Pizza</span></div>
+  <div class="header-meta">Direcionamento Estratégico · 20/05/2026</div>
+</header>
+
+<!-- TABS -->
+<div class="tabs-bar">
+  <button class="tab-btn active" onclick="showTab('resumo')" id="tab-resumo">
+    <i class="ti ti-layout-dashboard"></i> Visão Geral
+  </button>
+  <button class="tab-btn" onclick="showTab('pautas')" id="tab-pautas">
+    <i class="ti ti-list-details"></i> Pautas da Reunião
+  </button>
+  <button class="tab-btn" onclick="showTab('proximos')" id="tab-proximos">
+    <i class="ti ti-circle-check"></i> Próximos Passos
+  </button>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     TAB 1 — VISÃO GERAL
+═══════════════════════════════════════════════════════ -->
+<div class="tab-panel active" id="panel-resumo">
+<div class="page">
+
+  <!-- Summary Header -->
+  <div class="summary-header">
+    <div>
+      <h1>Direcionamento Estratégico Semanal</h1>
+      <p>Participantes: Rogério Loppiano · GG Almeida · Luiz Antonio (Paleta Food) · 20 de maio de 2026</p>
+    </div>
+    <div class="pill">📋 Reunião #20/05</div>
+  </div>
+
+  <!-- KPIs -->
+  <div class="slabel">Desempenho do mês — até dia 14/05</div>
+  <div class="kpi-grid gap">
+    <div class="kpi">
+      <div class="kpi-lbl">Meta mensal atingida</div>
+      <div class="kpi-val c-verde">50%</div>
+      <div class="kpi-sub">Na metade do mês ✓</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-lbl">Recorde Terça em Dobro</div>
+      <div class="kpi-val c-verde">28</div>
+      <div class="kpi-sub">pedidos no site em 19/05</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-lbl">Disparo Repediu (19/05)</div>
+      <div class="kpi-val c-ouro">840</div>
+      <div class="kpi-sub">mensagens enviadas</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-lbl">Retorno do disparo</div>
+      <div class="kpi-val c-verde">R$2k</div>
+      <div class="kpi-sub">14 compras imediatas</div>
+    </div>
+  </div>
+
+  <!-- Destaques -->
+  <div class="slabel">Destaques da reunião</div>
+  <div class="three-col gap">
+    <div>
+      <div class="insight ig">
+        <div class="insight-tag">📈 Performance</div>
+        <div class="insight-text">Terça em Dobro bate recorde semana após semana. Meta da GG é chegar a <strong>50 pedidos por terça</strong> para nivelar o faturamento da semana.</div>
+      </div>
+      <div class="insight ig">
+        <div class="insight-tag">♻️ Reativação</div>
+        <div class="insight-text">Clientes inativos há <strong>quase 3 anos</strong> voltaram a pedir após push via Repediu. Ferramenta validada operacionalmente.</div>
+      </div>
+    </div>
+    <div>
+      <div class="insight io">
+        <div class="insight-tag">🎂 Aniversariantes</div>
+        <div class="insight-text">Alinhamento feito: benefício vale o <strong>mês inteiro</strong>, não só o dia. Resgate de pontos: apenas seg–qui. Delivery: via WhatsApp com Larissa.</div>
+      </div>
+      <div class="insight io">
+        <div class="insight-tag">🐂 Festival do Boi</div>
+        <div class="insight-text">Combo Caprichosa + Garantida em andamento. GG vai contatar artesã indicada pelo Rogério para <strong>mimo incluso</strong> no combo (pulseira/brinco artesanal).</div>
+      </div>
+    </div>
+    <div>
+      <div class="insight ia">
+        <div class="insight-tag">🏆 Concorrência</div>
+        <div class="insight-text">Vignoli inaugurou com espaço kids — avaliado como inferior ao Vila Tomatinho. Estratégia: monitorar e acionar alavancas se necessário.</div>
+      </div>
+      <div class="insight ir">
+        <div class="insight-tag">🍕 iFood</div>
+        <div class="insight-text">Todas as promoções foram <strong>zeradas</strong> por ordem da Dona Lurdinha. Única promoção ativa: Terça em Dobro. Argumento autorizado: taxa grátis.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Alinhamentos importantes -->
+  <div class="slabel">Alinhamentos desta reunião</div>
+  <div class="two-col gap">
+    <div class="card">
+      <div class="card-title">Donus — Gestão aprofundada</div>
+      <div class="card-sub">Novo escopo a ser proposto pela Paleta Food</div>
+      <div class="rule-item"><i class="ti ti-circle-check" style="color:var(--verde-m);"></i><span>Rogério solicitou proposta com valor mensal para gestão do Donus (nível 3 — retenção)</span></div>
+      <div class="rule-item"><i class="ti ti-circle-check" style="color:var(--verde-m);"></i><span>Objetivo: medir novos clientes, engajamento dos atendentes nas trocas de pontos</span></div>
+      <div class="rule-item"><i class="ti ti-circle-check" style="color:var(--verde-m);"></i><span>Donus tem 12.000 envios de e-mail marketing disponíveis — a serem utilizados estrategicamente</span></div>
+      <div class="highlight-box">Paleta Food vai elaborar a proposta e apresentar para o Rogério.</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Recrutamento via Redes Sociais</div>
+      <div class="card-sub">Decisão tomada nesta reunião</div>
+      <div class="rule-item"><i class="ti ti-circle-check" style="color:var(--azul);"></i><span>Vagas serão publicadas <strong>apenas nos Stories</strong> — feed preservado para conteúdo de marca</span></div>
+      <div class="rule-item"><i class="ti ti-circle-check" style="color:var(--azul);"></i><span>Destaque temporário no perfil pode ser usado, com reciclagem periódica</span></div>
+      <div class="rule-item"><i class="ti ti-circle-check" style="color:var(--azul);"></i><span>GG enviará informações das vagas para a Paleta Food montar o material</span></div>
+      <div class="highlight-box" style="border-color:var(--azul);background:var(--azul-l);color:var(--azul-d);">Paleta Food aguarda informações da GG para produzir os posts de recrutamento.</div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     TAB 2 — PAUTAS DA REUNIÃO
+═══════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-pautas">
+<div class="page">
+
+  <!-- 1. Desempenho -->
+  <div class="topic-block">
+    <div class="topic-header">
+      <div class="topic-icon verde"><i class="ti ti-chart-bar"></i></div>
+      <div>
+        <div class="topic-title">📊 Desempenho do Mês</div>
+        <div class="topic-sub">Análise até o dia 14 de maio de 2026</div>
+      </div>
+      <div style="margin-left:auto;"><span class="badge badge-verde">✓ Em dia</span></div>
+    </div>
+    <div class="rule-item"><i class="ti ti-trending-up" style="color:var(--verde-m);"></i><span>50% da meta mensal já batida na metade do mês (quinta-feira, dia 14)</span></div>
+    <div class="rule-item"><i class="ti ti-trophy" style="color:var(--verde-m);"></i><span>Terça em Dobro atingiu <strong>recorde de 28 pedidos</strong> no site em 19/05 — crescimento semana a semana</span></div>
+    <div class="rule-item"><i class="ti ti-target" style="color:var(--ouro);"></i><span>Meta interna da GG: <strong>50 pedidos por terça</strong> para nivelar faturamento de seg–qui</span></div>
+    <div class="rule-item"><i class="ti ti-info-circle" style="color:var(--text3);"></i><span>Oscilações foram observadas (dia 12 mais fraco) — sazonalidade sendo monitorada ao longo dos meses</span></div>
+  </div>
+
+  <!-- 2. Repediu -->
+  <div class="topic-block">
+    <div class="topic-header">
+      <div class="topic-icon verde"><i class="ti ti-message-bolt"></i></div>
+      <div>
+        <div class="topic-title">📲 Repediu — CRM & WhatsApp</div>
+        <div class="topic-sub">Resultados da ativação de base de clientes</div>
+      </div>
+      <div style="margin-left:auto;"><span class="badge badge-verde">✓ Validado</span></div>
+    </div>
+    <div class="rule-item"><i class="ti ti-send" style="color:var(--verde-m);"></i><span>Disparo de <strong>840 mensagens</strong> em 19/05 → 14 compras imediatas → <strong>R$ 2.000 em vendas</strong></span></div>
+    <div class="rule-item"><i class="ti ti-users" style="color:var(--verde-m);"></i><span>Casos de reativação: clientes com último pedido em <strong>nov/2023</strong> voltaram após receber push</span></div>
+    <div class="rule-item"><i class="ti ti-rotate-clockwise" style="color:var(--azul);"></i><span>Quem pede na Terça em Dobro recebe push automático <strong>no sábado</strong> para recompra</span></div>
+    <div class="rule-item"><i class="ti ti-star" style="color:var(--azul);"></i><span>Todo cliente novo recebe mensagem de avaliação no <strong>Google</strong> após o primeiro pedido</span></div>
+  </div>
+
+  <!-- 3. Aniversariantes -->
+  <div class="topic-block">
+    <div class="topic-header">
+      <div class="topic-icon ouro"><i class="ti ti-cake"></i></div>
+      <div>
+        <div class="topic-title">🎂 Política de Aniversariantes</div>
+        <div class="topic-sub">Alinhamento de regras — gerou dúvidas no grupo</div>
+      </div>
+      <div style="margin-left:auto;"><span class="badge badge-ouro">✓ Alinhado</span></div>
+    </div>
+    <div class="rule-item"><i class="ti ti-circle-check" style="color:var(--ouro);"></i><span>Benefício válido durante <strong>todo o mês</strong> do aniversário — não só no dia</span></div>
+    <div class="rule-item"><i class="ti ti-discount" style="color:var(--ouro);"></i><span>Desconto vigente: <strong>50% em pizza grande, vinho ou sobremesa</strong> | 30% pizza família</span></div>
+    <div class="rule-item"><i class="ti ti-calendar-week" style="color:var(--azul);"></i><span>Resgate de pontos Donus: <strong>apenas de segunda a quinta</strong> (delivery e salão)</span></div>
+    <div class="rule-item"><i class="ti ti-brand-whatsapp" style="color:var(--verde-m);"></i><span>No delivery: solicitação via <strong>WhatsApp direto com a Larissa</strong></span></div>
+    <div class="rule-item"><i class="ti ti-shield-check" style="color:var(--vermelho);"></i><span>Controle antifraude: exigência de <strong>RG + foto em visualização única</strong> para liberar o benefício</span></div>
+  </div>
+
+  <!-- 4. Pacotes de Festa -->
+  <div class="topic-block">
+    <div class="topic-header">
+      <div class="topic-icon roxo"><i class="ti ti-confetti"></i></div>
+      <div>
+        <div class="topic-title">🎉 Pacotes de Festa — Loppiano Festas</div>
+        <div class="topic-sub">Acompanhamento de conversão e reservas</div>
+      </div>
+      <div style="margin-left:auto;"><span class="badge badge-roxo">Em andamento</span></div>
+    </div>
+    <div class="rule-item"><i class="ti ti-eye" style="color:var(--roxo);"></i><span>Luiz continua fazendo <strong>follow-up com Thalia</strong> sobre conversão e reservas</span></div>
+    <div class="rule-item"><i class="ti ti-chart-line" style="color:var(--roxo);"></i><span>Taxa de conversão e reservas sendo monitoradas em conjunto com a equipe operacional</span></div>
+  </div>
+
+  <!-- 5. Festival do Boi -->
+  <div class="topic-block">
+    <div class="topic-header">
+      <div class="topic-icon ouro"><i class="ti ti-flame"></i></div>
+      <div>
+        <div class="topic-title">🐂 Festival do Boi</div>
+        <div class="topic-sub">Combo + collab artesanal em desenvolvimento</div>
+      </div>
+      <div style="margin-left:auto;"><span class="badge badge-ouro">Em produção</span></div>
+    </div>
+    <div class="rule-item"><i class="ti ti-pizza" style="color:var(--ouro);"></i><span>Combo programado: <strong>Caprichosa + Garantida</strong> — meio a meio, representando os dois bois</span></div>
+    <div class="rule-item"><i class="ti ti-gift" style="color:var(--ouro);"></i><span>GG vai contatar artesã indicada pelo Rogério para <strong>pulseira ou brinco artesanal</strong> incluso no combo (brinde ~R$2,50)</span></div>
+    <div class="rule-item"><i class="ti ti-building-community" style="color:var(--verde-m);"></i><span>Collab com mães empreendedoras da EDC — gera afetividade e narrativa de impacto social</span></div>
+    <div class="rule-item"><i class="ti ti-video" style="color:var(--azul);"></i><span>Edição do material (vídeo) do Boi prevista para <strong>21/05</strong> — prazo de 2 dias de produção</span></div>
+    <div class="rule-item"><i class="ti ti-speakerphone" style="color:var(--azul);"></i><span>Posts sendo impulsionados via cards e stories — Rogério pediu intensificação dos anúncios</span></div>
+  </div>
+
+  <!-- 6. Namorados + Copa -->
+  <div class="topic-block">
+    <div class="topic-header">
+      <div class="topic-icon vermelho"><i class="ti ti-heart"></i></div>
+      <div>
+        <div class="topic-title">💑 Dia dos Namorados + Copa do Mundo</div>
+        <div class="topic-sub">Calendário de produção e ativações</div>
+      </div>
+      <div style="margin-left:auto;"><span class="badge badge-vermelho">Urgente</span></div>
+    </div>
+    <div class="rule-item"><i class="ti ti-camera" style="color:var(--vermelho);"></i><span>Produção com Fernanda e Pedro no dia <strong>21/05</strong> — roteiro já encaminhado pela Júlia</span></div>
+    <div class="rule-item"><i class="ti ti-trophy" style="color:var(--ouro);"></i><span>Copa do Mundo começa em <strong>13 de junho</strong> (abertura em 12/06, um dia antes do Dia dos Namorados)</span></div>
+    <div class="rule-item"><i class="ti ti-palette" style="color:var(--verde-m);"></i><span>Decoração temática planejada (festas juninas → boi → copa): 4 decorações consecutivas</span></div>
+    <div class="rule-item"><i class="ti ti-shirt" style="color:var(--ouro);"></i><span>Camisas da Copa em definição — <strong>Rogério dará retorno ao Luiz</strong> sobre modelo e orçamento</span></div>
+    <div class="rule-item"><i class="ti ti-brand-instagram" style="color:var(--azul);"></i><span>Conteúdo Copa já publicado: Vila Tomatinho verde-amarelo + "Neymar" Tomatinho para campanha</span></div>
+  </div>
+
+  <!-- 7. iFood -->
+  <div class="topic-block">
+    <div class="topic-header">
+      <div class="topic-icon vermelho"><i class="ti ti-bike"></i></div>
+      <div>
+        <div class="topic-title">🍕 iFood — Política de Promoções</div>
+        <div class="topic-sub">Zerado por ordem da Dona Lurdinha</div>
+      </div>
+      <div style="margin-left:auto;"><span class="badge badge-vermelho">Atenção</span></div>
+    </div>
+    <div class="rule-item"><i class="ti ti-x" style="color:var(--vermelho);"></i><span>Todas as promoções e combos do iFood foram <strong>zerados</strong> por ordem da Dona Lurdinha</span></div>
+    <div class="rule-item"><i class="ti ti-check" style="color:var(--verde-m);"></i><span>Única promoção ativa no delivery: <strong>Terça em Dobro</strong></span></div>
+    <div class="rule-item"><i class="ti ti-speakerphone" style="color:var(--azul);"></i><span>Argumento autorizado para atrair vendas em dias fracos: <strong>taxa grátis</strong> (confirmar com Rogério)</span></div>
+  </div>
+
+  <!-- 8. Vignoli -->
+  <div class="topic-block">
+    <div class="topic-header">
+      <div class="topic-icon azul"><i class="ti ti-building-store"></i></div>
+      <div>
+        <div class="topic-title">🏆 Vignoli — Análise de Concorrência</div>
+        <div class="topic-sub">Inaugurou esta semana em Manaus</div>
+      </div>
+      <div style="margin-left:auto;"><span class="badge badge-azul">Monitorando</span></div>
+    </div>
+    <div class="rule-item"><i class="ti ti-eye" style="color:var(--azul);"></i><span>Vignoli inaugurou com espaço kids — avaliado como <strong>inferior ao Vila Tomatinho</strong> em estrutura</span></div>
+    <div class="rule-item"><i class="ti ti-user-dollar" style="color:var(--azul);"></i><span>Público percebido como de ticket mais alto — sobreposição parcial com a Loppiano</span></div>
+    <div class="rule-item"><i class="ti ti-search" style="color:var(--ouro);"></i><span>Luiz vai fazer <strong>pesquisa de mercado</strong> para verificar se o play da Vignoli tem cobrança de acesso</span></div>
+    <div class="rule-item"><i class="ti ti-rocket" style="color:var(--verde-m);"></i><span>Alavanca reserva: acesso <strong>gratuito ao Vila Tomatinho</strong> em períodos estratégicos, se necessário</span></div>
+  </div>
+
+</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════
+     TAB 3 — PRÓXIMOS PASSOS
+═══════════════════════════════════════════════════════ -->
+<div class="tab-panel" id="panel-proximos">
+<div class="page">
+
+  <div class="summary-header" style="background:var(--verde);">
+    <div>
+      <h1>Próximos Passos</h1>
+      <p>Ações a acompanhar até a próxima reunião · Atualizado a cada call semanal</p>
+    </div>
+    <div class="pill">8 ações mapeadas</div>
+  </div>
+
+  <!-- Datas das reuniões -->
+  <div class="slabel">Calendário de reuniões</div>
+  <div class="meeting-dates gap">
+    <div class="meeting-date-card">
+      <div class="meeting-date-icon" style="background:var(--surface2);color:var(--text3);"><i class="ti ti-calendar-event"></i></div>
+      <div>
+        <div class="meeting-date-lbl">Última reunião</div>
+        <div class="meeting-date-val">20 de maio de 2026</div>
+      </div>
+    </div>
+    <div class="meeting-date-card" style="border-color:var(--verde-m);">
+      <div class="meeting-date-icon" style="background:var(--verde-l);color:var(--verde-m);"><i class="ti ti-calendar-plus"></i></div>
+      <div>
+        <div class="meeting-date-lbl">Próxima reunião</div>
+        <div class="meeting-date-val" style="color:var(--verde-m);">A definir</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Urgentes -->
+  <div class="slabel">Ações urgentes</div>
+  <div class="flow-section gap">
+    <table class="steps-table">
+      <thead>
+        <tr>
+          <th style="width:42%;">Ação</th>
+          <th style="width:20%;">Responsável</th>
+          <th style="width:20%;">Prazo</th>
+          <th style="width:18%;">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Enviar posts corrigidos</strong> — sabor ausente na listagem</td>
+          <td><span class="badge badge-verde">Luiz</span></td>
+          <td>Imediato</td>
+          <td><span class="badge badge-vermelho">Urgente</span></td>
+        </tr>
+        <tr>
+          <td><strong>Contatar artesã</strong> indicada pelo Rogério para mimo do Boi</td>
+          <td><span class="badge badge-ouro">GG</span></td>
+          <td>Hoje</td>
+          <td><span class="badge badge-vermelho">Urgente</span></td>
+        </tr>
+        <tr>
+          <td><strong>Edição do material do Boi</strong> (vídeo) — material do Rogério em edição</td>
+          <td><span class="badge badge-verde">Luiz</span></td>
+          <td>21/05</td>
+          <td><span class="badge badge-ouro">Em produção</span></td>
+        </tr>
+        <tr>
+          <td><strong>Produção Dia dos Namorados</strong> com Fernanda e Pedro</td>
+          <td><span class="badge badge-verde">Paleta Food</span></td>
+          <td>21/05</td>
+          <td><span class="badge badge-ouro">Em produção</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Demais ações -->
+  <div class="slabel">Demais ações da semana</div>
+  <div class="flow-section gap">
+    <table class="steps-table">
+      <thead>
+        <tr>
+          <th style="width:42%;">Ação</th>
+          <th style="width:20%;">Responsável</th>
+          <th style="width:20%;">Prazo</th>
+          <th style="width:18%;">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Confirmar entrega do cartão fidelidade</strong> com fornecedor</td>
+          <td><span class="badge badge-verde">Luiz</span></td>
+          <td>Sexta-feira</td>
+          <td><span class="badge badge-azul">Aguardando</span></td>
+        </tr>
+        <tr>
+          <td><strong>Montar material de recrutamento</strong> para Stories</td>
+          <td><span class="badge badge-verde">Paleta Food</span></td>
+          <td>Esta semana</td>
+          <td><span class="badge badge-azul">Aguarda GG</span></td>
+        </tr>
+        <tr>
+          <td><strong>Pesquisa de mercado Vignoli</strong> — cobra acesso ao play?</td>
+          <td><span class="badge badge-verde">Luiz</span></td>
+          <td>Esta semana</td>
+          <td><span class="badge badge-azul">Pendente</span></td>
+        </tr>
+        <tr>
+          <td><strong>Enviar PDF das regras do Vila Tomatinho</strong> pro grupo</td>
+          <td><span class="badge badge-verde">Paleta Food</span></td>
+          <td>Esta semana</td>
+          <td><span class="badge badge-azul">Pendente</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Ações do Rogério -->
+  <div class="slabel">Ações — Rogério</div>
+  <div class="two-col gap">
+    <div class="card">
+      <div class="card-title">Reunião com Walter</div>
+      <div class="card-sub">Segunda-feira, final da tarde</div>
+      <div class="rule-item"><i class="ti ti-map-pin" style="color:var(--verde-m);"></i><span>Se Walter vier à Loppiano: <strong>17h</strong></span></div>
+      <div class="rule-item"><i class="ti ti-map-pin" style="color:var(--ouro);"></i><span>Se for na Magistral: <strong>16h</strong> (evitar trânsito)</span></div>
+      <div class="rule-item"><i class="ti ti-circle-check" style="color:var(--azul);"></i><span>Luiz confirmou disponibilidade para ambos os horários</span></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Camisa da Copa</div>
+      <div class="card-sub">Retorno pendente para a Paleta Food</div>
+      <div class="rule-item"><i class="ti ti-shirt" style="color:var(--ouro);"></i><span>Definir modelo da camisa (equipe e/ou venda ao público)</span></div>
+      <div class="rule-item"><i class="ti ti-receipt" style="color:var(--ouro);"></i><span>Alinhamento de orçamento com o fornecedor</span></div>
+      <div class="rule-item"><i class="ti ti-calendar" style="color:var(--vermelho);"></i><span>Deadline: camisas precisam estar prontas até <strong>11 de junho</strong> (abertura Copa)</span></div>
+    </div>
+  </div>
+
+  <!-- Proposta Donus -->
+  <div class="card gap">
+    <div class="card-title">Proposta Gestão Donus — Paleta Food</div>
+    <div class="card-sub">Novo escopo solicitado pelo Rogério nesta reunião</div>
+    <div class="three-col" style="margin-top:4px;">
+      <div>
+        <div class="insight ig">
+          <div class="insight-tag">escopo</div>
+          <div class="insight-text">Gestão aprofundada do programa de fidelidade Donus (nível 3 — retenção). Hoje a Paleta opera no nível 2 (CRM/conversão via Repediu).</div>
+        </div>
+      </div>
+      <div>
+        <div class="insight io">
+          <div class="insight-tag">entregável</div>
+          <div class="insight-text">Criação de estratégias de uso do Donus: disparos de e-mail segmentados (12k/mês disponíveis), cashback, engajamento de atendentes.</div>
+        </div>
+      </div>
+      <div>
+        <div class="insight ia">
+          <div class="insight-tag">próximo passo</div>
+          <div class="insight-text">Luiz vai elaborar e apresentar proposta com valor mensal para o Rogério. Aprovação antes da implementação.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- WHATSAPP FLOAT -->
+<a class="wpp-float" href="https://wa.me/5592984890543?text=Oi%20J%C3%BAlia%2C%20tudo%20bem%3F%20Vim%20pelo%20dashboard%20da%20reuni%C3%A3o%20da%20Loppiano%20%F0%9F%98%84" target="_blank">
+  <i class="ti ti-brand-whatsapp"></i>
+  <div class="wpp-label">
+    Falar com a Júlia
+    <span class="wpp-name">Customer Success · Paleta Food</span>
+  </div>
+</a>
+
+<script>
+  function showTab(tab) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + tab).classList.add('active');
+    document.getElementById('tab-' + tab).classList.add('active');
+  }
+</script>
+</body>
+</html>
